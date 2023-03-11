@@ -1,11 +1,15 @@
 import express from "express";
 import { getSingleUser, postUser } from "../model/user/UserModel.js";
+import { hassPass } from "../utility/bcrypt.js";
+import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
 
 //post
 router.post("/", async (req, res, next) => {
   try {
+    req.body.password = hassPass(req.body.password);
+    req.body.verificationCode = uuidv4();
     const result = await postUser(req.body);
 
     result?._id
