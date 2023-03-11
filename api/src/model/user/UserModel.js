@@ -11,7 +11,7 @@ export const postUser = (userObj) => {
 
 //getSingleUser
 
-export const getSingleUser = ({_id})=> {
-    return UserSchema.findOne(_id)
+export const getSingleUser = ({filter})=> {
+    return UserSchema.findOne(filter)
 
 }
