@@ -2,11 +2,12 @@ import express from "express";
 import { getSingleUser, postUser } from "../model/user/UserModel.js";
 import { hassPass } from "../utility/bcrypt.js";
 import { v4 as uuidv4 } from "uuid";
+import { userLoginValidation, userRegistrationValidation } from "../middleware/joiMiddleware.js";
 
 const router = express.Router();
 
 //post
-router.post("/", async (req, res, next) => {
+router.post("/", userRegistrationValidation, async (req, res, next) => {
   try {
     req.body.password = hassPass(req.body.password);
     req.body.verificationCode = uuidv4();
@@ -15,7 +16,7 @@ router.post("/", async (req, res, next) => {
     result?._id
       ? res.json({
           status: "success",
-          message: "Aye looking good",
+          message: "User created Successfully",
         })
       : res.json({
           status: "error",
@@ -27,7 +28,7 @@ router.post("/", async (req, res, next) => {
 });
 
 //get
-router.get("/", async (req, res, next) => {
+router.post("/login", userLoginValidation, async (req, res, next) => {
   try {
     const result = await getSingleUser(req.body);
 

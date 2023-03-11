@@ -7,7 +7,7 @@ export const Header = ()=>{
   return (
     <Navbar bg="light" expand="md">
       <Container className='bg-info p-3 '>
-        <Navbar.Brand href="#home">E-commerce</Navbar.Brand>
+        <Navbar.Brand className='fw-bold' href="#home">E-commerce</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
